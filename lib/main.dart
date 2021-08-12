@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: 'Startup Name Generator',
+      // theme: new ThemeData(
+      //   primaryColor: Colors.pinkAccent,
+      // ),
       home: new RandomWords(),
     );
   }
@@ -57,7 +60,7 @@ class RandomWordsState extends State<RandomWords> {
       new MaterialPageRoute(
         builder: (context) {
           final tiles = _saved.map(
-                (pair) {
+            (pair) {
               return new ListTile(
                 title: new Text(
                   pair.asPascalCase,
@@ -66,12 +69,10 @@ class RandomWordsState extends State<RandomWords> {
               );
             },
           );
-          final divided = ListTile
-              .divideTiles(
+          final divided = ListTile.divideTiles(
             context: context,
             tiles: tiles,
-          )
-              .toList();
+          ).toList();
 
           return new Scaffold(
             appBar: new AppBar(
