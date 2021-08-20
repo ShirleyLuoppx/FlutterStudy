@@ -166,9 +166,30 @@ void test() {
   //也可以new Map
   var map1 = new Map();
   map1["key"] = "value";
+
+//可选参数分为，命名可选参数和位置可选参数
+//命名可选参数，调用时（就是普通认知里面的调用而已）
+  testFun(true, true);
+  //命名可选参数，定义时（也是普通认知里面的定义而已）
+  void testFun2(bool a) {}
+
+  //位置可选参数，定义时用[]包起来就是
+  //定义位置可选参数的时候，有一个非空判断 ，要么给位置可选参数的类型后面加上问号，定义成可空变量；
+  // 要么在参[]前面加上注释@required ，定义成必须可选参数。
+  // 但是这样的话感觉这个可选参数都没有意义了,,既然是必选那何必加在[]里面呢
+  // ignore: invalid_required_positional_param
+  void testFun3(bool a, [String? device]) {}
+  //调用位置可选参数
+  testFun3(true, "666");
+
+  void testFun4(bool a, [bool? b]) {}
+  //调用位置可选参数
+  testFun4(true);
+  testFun4(true, false);
 }
 
 //定义方法参数
-void testFun(bool isResult,bool isSuccess){
-}
+void testFun(bool isResult, bool isSuccess) {}
 
+//也可以省略类型声明，依旧可以正常使用
+testFun1(isResult, isSuccess) {}
