@@ -189,7 +189,8 @@ void test() {
   testFun4(true, false);
 
   testDeclareParams();
-  futureTest();
+  // futureTest();
+  streamTest();
 }
 
 //定义方法参数
@@ -319,9 +320,27 @@ void futureTest() {
   //    }
   // }
 
-
   // async用来表示函数是异步的，定义的函数会返回一个Future对象，可以使用then方法添加回调函数。
   // await 后面是一个Future，表示等待该异步任务完成，异步完成后才会往下走；await必须出现在 async 函数内部。
   //
   // 其实，无论是在JavaScript还是Dart中，async/await都只是一个语法糖，编译器或解释器最终都会将其转化为一个Promise（Future）的调用链。
+}
+
+//Stream 也是用于接收异步事件数据，和Future 不同的是，它可以接收多个异步操作的结果（成功或失败）
+void streamTest() {
+  Stream.fromFutures([
+    Future.delayed(new Duration(seconds: 1), () {
+      print('hello Stream');
+    }),
+    Future.delayed(new Duration(seconds: 2), () {
+      throw NullThrownError();
+    }),
+    Future.delayed(new Duration(seconds: 3), () {
+      print('flutter has a little hard to study --- ');
+    })
+  ]).listen((event) {
+    print('$event');
+  }, onError: (event) {
+    print('$event');
+  }, onDone: () {});
 }
