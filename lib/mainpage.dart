@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -153,7 +154,7 @@ void test() {
   var addSetList = <String>{};
   addSetList.add('sex');
   addSetList.addAll(setList);
-  assert(addSetList.length == 4);
+  assert(addSetList.length == 5);
 
   //Map
   var mapList = {"name": "list", "sex": "girl", "goodat": "dance and sing"};
@@ -186,6 +187,9 @@ void test() {
   //调用位置可选参数
   testFun4(true);
   testFun4(true, false);
+
+  testDeclareParams();
+  futureTest();
 }
 
 //定义方法参数
@@ -193,3 +197,131 @@ void testFun(bool isResult, bool isSuccess) {}
 
 //也可以省略类型声明，依旧可以正常使用
 testFun1(isResult, isSuccess) {}
+
+/// 使用Object声明变量和dynamic、var的区别
+void testDeclareParams() {
+  /**
+   * 使用Object声明变量
+   */
+  Object _obj;
+  //使用_obj先赋值为String
+  _obj = "declare a String params by using Object firstly , ";
+  //再赋值为int都是ok的
+  _obj = 1;
+  print('$_obj-----------');
+
+  /**
+   * 使用dynamic声明变量
+   */
+  dynamic _dyn;
+  _dyn = "declare a String param by using dynamic";
+  _dyn = 2;
+  print('$_dyn-----');
+
+  /**
+   * 使用var 声明变量
+   */
+  var _var;
+  _var = "declare a String param by using var";
+  _var = 3;
+  print('$_var---');
+}
+
+///Future异步操作返回结果测试
+void futureTest() {
+  //模拟一个耗时操作
+  Future.delayed(new Duration(seconds: 2), () {
+    return "delay 2 seconds";
+  }).then((value) {
+    //执行成功走这里
+    print('$value');
+  }); //打印  delay 2 seconds
+
+  Future.delayed(new Duration(seconds: 2), () {
+    throw NullThrownError();
+  }).then((value) {
+    //执行成功走这里
+    print('$value');
+  }).catchError((e) {
+    //失败走这里
+    print('catchError---- $e');
+  }); //打印 Throw of null.
+
+  Future.delayed(new Duration(seconds: 2), () {
+    throw NullThrownError();
+  }).then((value) {
+    //执行成功走这里
+    print('$value');
+  }, onError: (e) {
+    print('onError-----$e');
+  }); //打印 Throw of null.
+
+  Future.delayed(new Duration(seconds: 2), () {
+    throw AssertionError("Error---");
+  }).then((value) {
+    //执行成功走这里
+    print('$value');
+  }).catchError((e) {
+    print('catchError----$e');
+  }).whenComplete(() => {
+        // '无论成功活失败都走这里'
+      });
+
+  //Future.wait 用于异步请求两个接口，讲最后的结果处理后显示在ui上
+  //只有当两个请求 都ok后才会走到then，反之走到catchError
+  Future.wait([
+    Future.delayed(new Duration(seconds: 2), () {
+      print('hello');
+    }),
+    Future.delayed(new Duration(seconds: 2), () {
+      print('word');
+    })
+  ]).then((value) => print('${value[0]}----${value[1]}')).catchError((e) {
+    print('$e');
+  });
+
+  ///使用Future、await/sync来 避免CallbackHell
+  //Callback Hell
+  //login("alice","******").then((id){
+  //  //登录成功后通过，id获取用户信息
+  //  getUserInfo(id).then((userInfo){
+  //     //获取用户信息后保存
+  //     saveUserInfo(userInfo).then((){
+  //        //保存用户信息，接下来执行其它操作
+  //         ...
+  //     });
+  //   });
+  // })
+
+  //伪代码
+  //Future的
+  //login("alice","******").then((id){
+  //   	return getUserInfo(id);
+  // }).then((userInfo){
+  //     return saveUserInfo(userInfo);
+  // }).then((e){
+  //    //执行接下来的操作
+  // }).catchError((e){
+  //   //错误处理
+  //   print(e);
+  // });
+
+  //await+sync的
+  //task() async {
+  //    try{
+  //     String id = await login("alice","******");
+  //     String userInfo = await getUserInfo(id);
+  //     await saveUserInfo(userInfo);
+  //     //执行接下来的操作
+  //    } catch(e){
+  //     //错误处理
+  //     print(e);
+  //    }
+  // }
+
+
+  // async用来表示函数是异步的，定义的函数会返回一个Future对象，可以使用then方法添加回调函数。
+  // await 后面是一个Future，表示等待该异步任务完成，异步完成后才会往下走；await必须出现在 async 函数内部。
+  //
+  // 其实，无论是在JavaScript还是Dart中，async/await都只是一个语法糖，编译器或解释器最终都会将其转化为一个Promise（Future）的调用链。
+}
