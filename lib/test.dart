@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       decoration: new BoxDecoration(color: Colors.white),
       child: new Center(
         child: new Text(
-          "hello Flutter",
+          "hello 666",
           textDirection: TextDirection.ltr,
           style: new TextStyle(fontSize: 40, color: Colors.black87),
         ),
