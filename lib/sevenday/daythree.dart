@@ -63,18 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: Text(
-        "雕栏玉砌应犹在，只是朱颜改。$_counter"*2,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-            color: Colors.green,
-            fontWeight: FontWeight.bold,
-            fontStyle: FontStyle.italic,
-            letterSpacing: 2,
-            fontSize: 20,
-            background: Paint()..color = Colors.yellow),
-      ),
+      body: expandedTest,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -83,11 +72,55 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: new Icon(
           Icons.add,
-          size:25,
+          size: 25,
           color: Colors.brown,
           semanticLabel: "hhaa",
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  ///Row  行
+  ///横向排列，如果内容超出一行会有一个黄色斜条纹提示
+  var rowTest = Row(
+    children: <Widget>[
+      Text(
+        "雕栏玉砌应犹在，"
+      ),
+      Text("只是朱颜改。"),
+      Text("问君能有几多愁，"),
+      Text("恰似一江春水向东流。")
+    ],
+  );
+
+  ///Column  列
+  var columnTest = Column(
+    children: <Widget>[
+      Text("雕栏玉砌应犹在，"),
+      Text("只是朱颜改。"),
+      Text("问君能有几多愁，"),
+      Text("恰似一江春水向东流。")
+    ],
+  );
+
+  ///Expanded  就是让内容扩展到均匀铺满当前 行/列
+  var expandedTest = Row(
+    children: <Widget>[
+      Expanded(child: Text("雕栏玉砌应犹在，")),
+      Expanded(child: Text("雕栏玉砌应犹在，")),
+      Expanded(child: Text("雕栏玉砌应犹在，")),
+      Expanded(child: Text("雕栏玉砌应犹在，"))
+    ],
+  );
+
+  var expandedTest1 = Column(
+    children: <Widget>[
+      Expanded(child: Text("雕栏玉砌应犹在，")),
+      Expanded(child: Text("雕栏玉砌应犹在，")),
+      Expanded(child: Text("雕栏玉砌应犹在，")),
+      Expanded(child: Text("雕栏玉砌应犹在，"))
+    ],
+  );
+
+  ///Container--容器
 }
