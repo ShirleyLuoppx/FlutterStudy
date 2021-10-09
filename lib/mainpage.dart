@@ -406,3 +406,10 @@ void mapBaseUse() {
   dict.remove("c");
   print(dict);//{a: page2, b: page30, price: 40}
 }
+
+void mapOp() {
+  var dict = {"a": "page1", "b": "page30", "c": "page70", "price": 40};
+  dict.keys.forEach(print); //a,b,c,price
+  dict.values.forEach(print); //a,b,c,price
+  dict.forEach((k, v) => (print("$k=$v"))); //这里用括号包着，好想吐槽...
+}
