@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: offStageTest,
+      body: tableTest,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -80,6 +80,62 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  /// ---------------------------------------------------基础控件三大战力（Table、Flow、Wrap）start--------------------------------------
+  //流动容器--Flow
+  // var flowTest = new Flow(delegate: delegate);
+
+
+  //Table 表格
+  var tableTest = new Table(
+    columnWidths: const <int, TableColumnWidth>{
+      0: FixedColumnWidth(80.0),
+      1: FixedColumnWidth(60.0),
+      2: FixedColumnWidth(100.0),
+    },
+    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+    border: TableBorder.all(
+        color: Colors.greenAccent, style: BorderStyle.solid, width: 1.0),
+    children: const <TableRow>[
+      TableRow(children: <Widget>[
+        Center(child: Text("姓名")),
+        Center(child: Text("类型")),
+        Center(child: Text("分路")),
+      ]),
+      TableRow(children: <Widget>[
+        Text(
+          "瑶妹",
+          style: TextStyle(wordSpacing: 10),
+          textAlign: TextAlign.center,
+        ),
+        Text("辅助"),
+        Text("游走支援")
+      ]),
+      TableRow(children: <Widget>[
+        Center(child: Text("李元芳")),
+        Center(child: Text("射手")),
+        Center(child: Text("发育路")),
+      ]),
+      TableRow(children: <Widget>[
+        Center(child: Text("甄姬")),
+        Center(child: Text("法师")),
+        Center(child: Text("中路")),
+      ]),
+      TableRow(children: <Widget>[
+        Center(child: Text("孙策")),
+        Center(child: Text("坦克")),
+        Center(child: Text("对抗路")),
+      ]),
+      TableRow(children: <Widget>[
+        Center(child: Text("宫本武藏")),
+        Center(child: Text("刺客")),
+        Center(child: Text("打野游走支援")),
+      ])
+    ],
+  );
+
+  /// ---------------------------------------------------基础控件三大战力（Table、Flow、Wrap）end--------------------------------------
+
+  /// ---------------------------------------------------基础控件start--------------------------------------
   //Offstage，控制显隐容器：控制部件显隐的部件。true：隐藏；false：显示
   var offStageTest = new Container(
     color: Colors.black,
@@ -252,4 +308,6 @@ class _MyHomePageState extends State<MyHomePage> {
           Text("this is a combine container with Container and Padding widget"),
     ),
   );
+
+  /// ---------------------------------------------------基础控件end--------------------------------------
 }
