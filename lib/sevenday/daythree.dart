@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: combineContainerPaddingTest,
+      body: offStageTest,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -79,6 +79,93 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  //Offstage，控制显隐容器：控制部件显隐的部件。true：隐藏；false：显示
+  var offStageTest = new Container(
+    color: Colors.black,
+    width: 300,
+    height: 300,
+    child: Offstage(
+      offstage: true,
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Text(
+          "容易莫摧残",
+          style: TextStyle(
+              color: Colors.white,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.underline),
+        ),
+      ),
+    ),
+  );
+
+  //Transform，变换容器：包含平移，旋转和缩放
+  var transform = new Transform(
+    transform: Matrix4.translationValues(100, 100, 0),
+    child: Container(
+      color: Colors.brown,
+      width: 300,
+      height: 100,
+      child: Text("逆风如解意"),
+    ),
+    //transform的偏移量，不设置的话就是从屏幕左上角的位置开始transform，设置后就是从设置的点开始transform
+    origin: Offset(0, 100),
+  );
+
+  //IndexedStack  索引堆叠容器：按照index来显示堆叠的部件，同时只能显示一个部件
+  var indexedStackContainerTest = new Container(
+    color: Colors.green,
+    width: 300,
+    height: 300,
+    child: IndexedStack(
+      index: 3,
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        Align(
+          alignment: Alignment.topCenter,
+          child: Card(
+            elevation: 10,
+            color: Colors.grey,
+            child: Text("秋夕"),
+          ),
+        ),
+        Text("银烛秋光冷画屏，"),
+        Text("轻罗小扇扑流萤。"),
+        Text("天阶夜色凉如水，"),
+        Text("坐看牛郎织女星。"),
+      ],
+    ),
+  );
+
+  ///Stack
+  //Stack像FrameLayout一样会布局重叠
+  //感觉Flutter的布局像是在套娃，一直children、child的..爷爷套爸爸，爸爸套儿子，儿子套孙子
+  var stackContainerTest = new Container(
+    color: Color.fromARGB(96, 70, 9, 199),
+    width: 300,
+    height: 300,
+    child: Stack(
+      alignment: Alignment.centerLeft,
+      children: <Widget>[
+        Text("去年今日此门中，"),
+        Align(
+          alignment: Alignment.topRight,
+          widthFactor: 1,
+          child: Card(
+            elevation: 10,
+            margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+            child: Text("题都城南庄"),
+            color: Color(0xffffffff),
+          ),
+        ),
+        Text("人面桃花相映红。"),
+        Text("人面不知何处去，"),
+        Text("桃花依旧笑春风。"),
+      ],
+    ),
+  );
 
   ///Row  行
   ///横向排列，如果内容超出一行会有一个黄色斜条纹提示
@@ -165,6 +252,4 @@ class _MyHomePageState extends State<MyHomePage> {
           Text("this is a combine container with Container and Padding widget"),
     ),
   );
-
-  var stack = new Stack();
 }
