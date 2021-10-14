@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -63,7 +65,17 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: tableTest,
+      body: new Wrap(
+        direction: Axis.vertical,
+        alignment: WrapAlignment.start,
+        // 列间距
+        spacing: 8.0,
+        //行间距
+        runSpacing: 4.0,
+        //child的对齐方式
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: formColorList(60),
+      ),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -81,9 +93,40 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// ---------------------------------------------------基础控件三大战力（Table、Flow、Wrap）start--------------------------------------
-  //流动容器--Flow
-  // var flowTest = new Flow(delegate: delegate);
 
+  //Wrap 包裹
+  // var wrap = new Wrap(
+  //   direction: Axis.horizontal,
+  //   alignment: WrapAlignment.center,
+  //   spacing: 8.0,
+  //   // 列间距
+  //   runSpacing: 4.0,
+  //   //行间距
+  //   crossAxisAlignment: WrapCrossAlignment.center,
+  //   children: formColorList(50),
+  // );
+
+  //Flow  流动容器
+  var li = <Widget>[];
+
+  formColorList(int count) {
+    li.clear();
+    var random = new Random();
+
+    for (int i = 0; i < count; i++) {
+      li.add(new Container(
+        width: 100 * (random.nextDouble() + 0.3),
+        height: 30,
+        color: Color.fromARGB(random.nextInt(999), random.nextInt(888),
+            random.nextInt(777), random.nextInt(777)),
+      ));
+    }
+    return li;
+  }
+
+  // var flowTest = Flow(
+  // delegate: MarginFlowDelegate(EdgeInsets.all(5)),
+  // children: formColorList(60))
 
   //Table 表格
   var tableTest = new Table(
@@ -314,22 +357,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ///添加一个FlowDelegate的实现类
 class MarginFlowDelegate extends FlowDelegate {
-  EdgeInsets _margin = EdgeInsets.zero;//成员变量_margin
+  EdgeInsets _margin = EdgeInsets.zero; //成员变量_margin
   MarginFlowDelegate(this._margin); //构造函数
-  @override//绘制孩子的方法
+  @override //绘制孩子的方法
   void paintChildren(FlowPaintingContext context) {
     var offsetX = _margin.left;
     var offsetY = _margin.top;
     for (int i = 0; i < context.childCount; i++) {
       var w = context.getChildSize(i)!.width + offsetX + _margin.right;
       if (w < context.size.width) {
-        context.paintChild(i, transform: new Matrix4.translationValues(offsetX, offsetY, 0.0));
+        context.paintChild(i,
+            transform: new Matrix4.translationValues(offsetX, offsetY, 0.0));
         offsetX = w + _margin.left;
       } else {
         offsetX = _margin.left;
-        offsetY += context.getChildSize(i)!.height + _margin.top + _margin.bottom;
-        context.paintChild(i,transform: new Matrix4.translationValues(offsetX, offsetY, 0.0));
-        offsetX += context.getChildSize(i)!.width + _margin.left + _margin.right;
+        offsetY +=
+            context.getChildSize(i)!.height + _margin.top + _margin.bottom;
+        context.paintChild(i,
+            transform: new Matrix4.translationValues(offsetX, offsetY, 0.0));
+        offsetX +=
+            context.getChildSize(i)!.width + _margin.left + _margin.right;
       }
     }
   }
@@ -338,4 +385,4 @@ class MarginFlowDelegate extends FlowDelegate {
   bool shouldRepaint(covariant FlowDelegate oldDelegate) {
     throw UnimplementedError();
   }
-
+}
