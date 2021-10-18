@@ -65,7 +65,15 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: verticalGridView,
+      body: Column(
+        children: <Widget>[
+          ListBody(
+            mainAxis: Axis.vertical,
+            reverse: false,
+            children: formColorList(5),
+          )
+        ],
+      ),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -83,6 +91,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   /// ---------------------------------------------------基础控件列表  start--------------------------------------
+
+  //竖直ListBody
+  // var verticalListBody = Column(
+  //   children: <Widget>[
+  //     ListBody(
+  //       mainAxis: Axis.vertical,
+  //       reverse: false,
+  //       children: fromColorList(5),
+  //     )
+  //   ],
+  // );
+
+  //水平ListBody
+  // var listBody = Row(
+  //   children: <Widget>[
+  //     ListBody(
+  //       mainAxis: Axis.horizontal,
+  //       children: formColorList(5),
+  //       reverse: false,
+  //     )
+  //   ],
+  // );
 
   //GridView
   var gridViewTest = new GridView.count(
