@@ -65,17 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: new Wrap(
-        direction: Axis.vertical,
-        alignment: WrapAlignment.start,
-        // 列间距
-        spacing: 8.0,
-        //行间距
-        runSpacing: 4.0,
-        //child的对齐方式
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: formColorList(60),
-      ),
+      body: verticalListViewTest,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -94,11 +84,37 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// ---------------------------------------------------基础控件列表  start--------------------------------------
 
-  //ListView
-  // var listViewTest = ListView()
+  //GridView
+  var gridViewTest = new GridView.count(crossAxisCount: crossAxisCount);
+
+  //默认竖直ListView
+  var listViewTest = ListView.builder(
+      //item数量
+      itemCount: 20,
+      padding: EdgeInsets.all(8),
+      //itemExtent:item高度，宽度默认填充屏幕
+      itemExtent: 100,
+      //itemBuilder：item内容
+      itemBuilder: (BuildContext context, int index) {
+        return Card(
+          child: Center(child: Text("hello ppx $index")),
+        );
+      });
+
+  //竖直lv
+  var verticalListViewTest = new ListView.builder(
+    itemCount: 20,
+    itemExtent: 100,
+    padding: EdgeInsets.all(8),
+    scrollDirection: Axis.horizontal,
+    itemBuilder: (BuildContext context, int index) {
+      return Card(
+        child: Text("hello world $index"),
+      );
+    },
+  );
 
   /// ---------------------------------------------------基础控件列表  end--------------------------------------
-
 
   /// ---------------------------------------------------基础控件三大战力（Table、Flow、Wrap）start--------------------------------------
 
