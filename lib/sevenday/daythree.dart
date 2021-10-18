@@ -65,15 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[
-          ListBody(
-            mainAxis: Axis.vertical,
-            reverse: false,
-            children: formColorList(5),
-          )
-        ],
-      ),
+      body: fractionallySizedBoxTest,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -90,9 +82,60 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  /// ---------------------------------------------------容器  start--------------------------------------
+
+  //FractionallySizedBox
+  var fractionallySizedBoxTest = Container(
+    height: 150,
+    width: 150,
+    color: Colors.red,
+    child: new FractionallySizedBox(
+      alignment: Alignment.center,
+      widthFactor: 0.5,
+      heightFactor: 1.5,
+      child: new Container(
+        color: Colors.blue,
+      ),
+    ),
+  );
+
+  //BaseLine ，将文字按基线对其
+
+  //竖直列Column
+  // var baseLineColumnTest = new Column(
+  // children: formTextList(5),
+  // );
+
+  //水平行Row
+  // var baseLineRowTest =  new Row(
+  // children: formTextList(5),
+  // );
+
+  formTextList(int count) {
+    var li = <Widget>[];
+    var random = Random();
+
+    for (int i = 0; i < count; i++) {
+      var baseLine = new Baseline(
+        //baseline越大，距离顶部越远
+        baseline: 80,
+        child: Text(
+          'baseLine',
+          style: TextStyle(fontSize: 10.0 + random.nextInt(20)),
+        ),
+        //这个不知道啥意思，感觉两个值差不多的效果吖
+        baselineType: TextBaseline.ideographic,
+      );
+      li.add(baseLine);
+    }
+    return li;
+  }
+
+  /// ---------------------------------------------------容器  end--------------------------------------
+
   /// ---------------------------------------------------基础控件列表  start--------------------------------------
 
-  //竖直ListBody
+  //竖直ListBody    其实还是有点搞不清Column 和Row...傻傻分不清楚
   // var verticalListBody = Column(
   //   children: <Widget>[
   //     ListBody(
