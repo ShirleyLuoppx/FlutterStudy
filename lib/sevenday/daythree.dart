@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: verticalListViewTest,
+      body: verticalGridView,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -85,7 +85,26 @@ class _MyHomePageState extends State<MyHomePage> {
   /// ---------------------------------------------------基础控件列表  start--------------------------------------
 
   //GridView
-  var gridViewTest = new GridView.count(crossAxisCount: crossAxisCount);
+  var gridViewTest = new GridView.count(
+    crossAxisCount: 4,
+    children: List.generate(20, (index) {
+      return Card(
+        child: Center(child: Text("hello gridView $index")),
+      );
+    }),
+  );
+
+  var verticalGridView = GridView.count(
+    crossAxisCount: 4,
+    scrollDirection: Axis.horizontal,
+    children: List.generate(20, (index) {
+      return Card(
+        child: Center(
+          child: Text("hello vertical gridview $index"),
+        ),
+      );
+    }),
+  );
 
   //默认竖直ListView
   var listViewTest = ListView.builder(
