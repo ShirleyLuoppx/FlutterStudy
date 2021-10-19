@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: fractionallySizedBoxTest,
+      body: aspectRatio,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -84,15 +84,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
   /// ---------------------------------------------------容器  start--------------------------------------
 
+  //AspectRatio  一个设置比例的容器：aspectRatio=width/height
+  var aspectRatio = Container(
+    width: 200,
+    child: new AspectRatio(
+      aspectRatio: 1,
+      child: Container(
+        color: Colors.red,
+      ),
+    ),
+  );
+
   //FractionallySizedBox
   var fractionallySizedBoxTest = Container(
     height: 150,
-    width: 150,
+    width: 300,
     color: Colors.red,
     child: new FractionallySizedBox(
       alignment: Alignment.center,
-      widthFactor: 0.5,
-      heightFactor: 1.5,
+      widthFactor: 2,
+      heightFactor: 0.5,
       child: new Container(
         color: Colors.blue,
       ),
