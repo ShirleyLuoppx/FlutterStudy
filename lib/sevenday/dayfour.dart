@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterapp/sevenday/MultiShower.dart';
 
-///基础控件
+/// 基础控件(下)+Flex布局详解
 
 void main() {
   runApp(new MyApp());
@@ -43,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: Text("hello day four ~~ count:$_counter"),
+      body: mainAxisAlignmentTest,
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -59,4 +62,110 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
+  ///
+  /// 主轴方向：MainAxisAlignment
+  ///
+  var mainAxisAlignmentDirections = [
+    MainAxisAlignment.start,
+    MainAxisAlignment.center,
+    MainAxisAlignment.end,
+    MainAxisAlignment.spaceBetween,
+    MainAxisAlignment.spaceAround,
+    MainAxisAlignment.spaceEvenly
+  ];
+  var mainAxisAlignmentTest = MultiShower(
+    [MainAxisAlignment.start],
+    (e) {
+      return Flex(
+        direction: Axis.horizontal,
+        mainAxisAlignment: e,
+        children: <Widget>[
+          Container(
+            width: 50,
+            height: 50,
+            color: Colors.red,
+          ),
+          Container(
+            width: 30,
+            height: 60,
+            color: Colors.blue,
+          ),
+          Container(
+            width: 70,
+            height: 30,
+            color: Colors.yellow,
+          ),
+          Container(
+            width: 100,
+            height: 60,
+            color: Colors.green,
+          )
+        ],
+      );
+    },
+    infos: [""],
+    width: 500,
+    height: 200,
+  );
+
+  ///
+  /// 轴向：Axis
+  ///
+  var direction = [Axis.horizontal, Axis.horizontal];
+  var show = MultiShower(
+    [Axis.vertical],
+    (e) {
+      return Flex(
+        direction: e,
+        children: <Widget>[
+          Container(
+            width: 50,
+            height: 50,
+            color: Colors.red,
+          ),
+          Container(
+            width: 30,
+            height: 60,
+            color: Colors.blue,
+          ),
+          Container(
+            width: 70,
+            height: 30,
+            color: Colors.yellow,
+          ),
+          Container(
+            width: 100,
+            height: 60,
+            color: Colors.green,
+          )
+        ],
+      );
+    },
+    color: Colors.black,
+    height: 300,
+    width: 500,
+    infos: [""],
+  );
+
+  var redContainer = Container(
+    width: 50,
+    height: 50,
+    color: Colors.red,
+  );
+  var blueContainer = Container(
+    width: 30,
+    height: 60,
+    color: Colors.blue,
+  );
+  var yellowContainer = Container(
+    width: 70,
+    height: 30,
+    color: Colors.yellow,
+  );
+  var greenContainer = Container(
+    width: 100,
+    height: 60,
+    color: Colors.green,
+  );
 }
