@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: Text("click count time : $_counter"),
+      body: test1Fun(),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -57,6 +57,33 @@ class _MyHomePageState extends State<MyHomePage> {
           semanticLabel: "hhaa",
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  //布局demo
+  var rowLine = Row(
+    children: <Widget>[
+      Icon(
+        Icons.extension,
+        color: Colors.blue,
+      ),
+      Expanded(
+          child: Padding(
+        padding: EdgeInsets.only(left: 5),
+        child: Text(
+          "好友微视",
+          style: TextStyle(color: Colors.black, fontSize: 20),
+        ),
+      )),
+      Icon(Icons.arrow_forward)
+    ],
+  );
+
+  test1Fun() {
+    return Container(
+      child: rowLine,
+      padding: EdgeInsets.all(10),
+      color: Colors.white,
     );
   }
 }
