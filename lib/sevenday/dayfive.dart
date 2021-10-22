@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: test4Fun(),
+      body: listViewTestFun3(),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -59,6 +59,65 @@ class _MyHomePageState extends State<MyHomePage> {
           semanticLabel: "hhaa",
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  //ListView的栗子3，在item中间循环插入一个item
+  listViewTestFun3() {
+    return ListView.separated(
+        itemBuilder: (BuildContext ctx, int i) {
+          return Column(
+            children: [
+              test4Fun(),
+              Divider(
+                height: 1,
+              )
+            ],
+          );
+        },
+        separatorBuilder: (BuildContext ctx, int i) {
+          return Column(
+            children: [(i + 1) % 2 == 0 ? test2Fun() : Container()],
+          );
+        },
+        itemCount: 30);
+  }
+
+  //ListView的栗子2，在item中间固定位置插入一个item
+  listViewTestFun2() {
+    return ListView.separated(
+        itemBuilder: (BuildContext ctx, int i) {
+          return Column(
+            children: [
+              test4Fun(),
+              Divider(
+                height: 1,
+              )
+            ],
+          );
+        },
+        separatorBuilder: (BuildContext ctx, int i) {
+          return Column(
+            children: [i == 1 ? test2Fun() : Container()],
+          );
+        },
+        itemCount: 30);
+  }
+
+  //ListView栗子1
+  listViewTestFun() {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int count) {
+        return Column(
+          children: [
+            test4Fun(),
+            Divider(
+              height: 1,
+            )
+          ],
+        );
+      },
+      itemCount: 30,
     );
   }
 
@@ -137,6 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
           "images/flutter.png",
           height: 100,
           width: 150,
+          fit: BoxFit.fitWidth,
         ),
       )
     ],
