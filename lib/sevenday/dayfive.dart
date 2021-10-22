@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: test2Fun(),
+      body: test3Fun(),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -62,6 +62,123 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  //布局栗子4
+
+
+  //布局栗子3
+  test3Fun() {
+    return Container(
+      color: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(2, 20, 5, 20),
+            child: headImg,
+          ),
+          Expanded(
+              child: Padding(
+            padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
+            child: centerContent,
+          )),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: iconsRow,
+          ),
+        ],
+      ),
+    );
+  }
+
+  var headImg = Container(
+    child: Image.asset("images/headimg.png"),
+    width: 90,
+    height: 90,
+  );
+
+  var centerContent = Container(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "张风捷特烈",
+          style: TextStyle(
+              fontSize: 30, color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Icon(Icons.shopping_bag_sharp),
+              ),
+              Text(
+                "万花过尽知无物",
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
+              Text(" | "),
+              Text(
+                "编程之王",
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 5),
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: Icon(Icons.perm_identity),
+              ),
+              Text(
+                "海的彼岸有我未曾见证的风采",
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  );
+
+  var iconsRow = Column(
+    children: [
+      Row(children: [
+        Padding(
+          padding: EdgeInsets.all(5),
+          child: Image.asset("images/weibo.png"),
+        ),
+        Padding(
+          padding: EdgeInsets.all(5),
+          child: Image.asset("images/github.png"),
+        ),
+        Padding(
+          padding: EdgeInsets.all(5),
+          child: Image.asset("images/earth.png"),
+        ),
+      ]),
+      Padding(
+        padding: EdgeInsets.only(top: 25),
+        child: Container(
+          child: Text(
+            "已关注",
+            style: TextStyle(fontSize: 20, color: Colors.white,),
+          ),
+          width: 110,
+          height: 40,
+          color: Colors.green,
+          alignment: Alignment.center,
+        ),
+      )
+    ],
+  );
+
+  //布局栗子2
   test2Fun() {
     return Padding(
       padding: EdgeInsets.all(5),
@@ -80,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 5,top: 5),
+                padding: EdgeInsets.only(left: 5, top: 5),
                 child: Text(
                   "点绛唇",
                   style: TextStyle(fontSize: 20, color: Colors.black),
@@ -113,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  //布局demo
+  //布局栗子1
   var rowLine = Row(
     children: <Widget>[
       Icon(
