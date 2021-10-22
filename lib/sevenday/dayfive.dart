@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: test3Fun(),
+      body: test4Fun(),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -63,7 +63,117 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   //布局栗子4
+  test4Fun() {
+    return Container(
+      padding: EdgeInsets.all(10),
+      color: Colors.white,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                headImgAndName,
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    "Flutter第四天--基础控件（下）+Flex布局详解",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 20, color: Colors.black, wordSpacing: 10),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text(
+                    "1.2：优雅地查看：图片的适应模式--BOXFIT 1.3：优雅地查看：颜色混合颜色混合颜色混合",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: commentIcon,
+                )
+              ],
+            ),
+          ),
+          Column(
+            children: [endFlutter],
+          )
+        ],
+      ),
+    );
+  }
 
+  var headImgAndName = Row(
+    children: [
+      Image.asset(
+        "images/headimg.png",
+        width: 40,
+        height: 40,
+      ),
+      Text(
+        "张风杰特列",
+        style: TextStyle(fontSize: 15, color: Colors.black),
+      )
+    ],
+  );
+
+  var endFlutter = Column(
+    crossAxisAlignment: CrossAxisAlignment.end,
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      Text(
+        "Flutter/Dart",
+        style: TextStyle(color: Colors.grey, fontSize: 18),
+      ),
+      Padding(
+        padding: EdgeInsets.only(top: 30),
+        child: Image.asset(
+          "images/flutter.png",
+          height: 100,
+          width: 150,
+        ),
+      )
+    ],
+  );
+
+  var commentIcon = Row(
+    children: [
+      Container(
+        child: Flex(
+          direction: Axis.horizontal,
+          children: [
+            Row(
+              children: [
+                Image.asset("images/like.png"),
+                Text(
+                  "19",
+                  style: TextStyle(color: Colors.green, fontSize: 13),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Image.asset("images/comment.png"),
+                Text(
+                  "4",
+                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                )
+              ],
+            )
+          ],
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ),
+        height: 30,
+        width: 120,
+      )
+    ],
+  );
 
   //布局栗子3
   test3Fun() {
@@ -167,7 +277,10 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           child: Text(
             "已关注",
-            style: TextStyle(fontSize: 20, color: Colors.white,),
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
+            ),
           ),
           width: 110,
           height: 40,

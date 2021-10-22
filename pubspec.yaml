@@ -51,6 +51,9 @@ flutter:
     - images/weibo.png
     - images/github.png
     - images/earth.png
+    - images/flutter.png
+    - images/like.png
+    - images/comment.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:
