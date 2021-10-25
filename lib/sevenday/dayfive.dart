@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: listViewTestFun3(),
+      body: gestureDetectorDragFun(),
       floatingActionButton: new FloatingActionButton(
         backgroundColor: Colors.black12,
         elevation: 12,
@@ -60,6 +60,68 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  //拖拽
+  gestureDetectorDragFun() {
+    return GestureDetector(
+      child: box,
+      //开始竖直按下
+      onVerticalDragDown: (details) {
+        print("onVerticalDragDown：" + details.globalPosition.toString());
+      },
+      onVerticalDragStart: (details) {
+        print("onVerticalDragStart :${details.globalPosition}");
+      },
+      onVerticalDragUpdate: (details) {
+        print("onVerticalDragUpdate:${details.globalPosition}");
+      },
+      onVerticalDragEnd: (details) {
+        print("onVerticalDragEnd :${details.primaryVelocity}");
+      },
+      onVerticalDragCancel: () {
+        print("onVerticalDragCancel");
+      },
+    );
+  }
+
+  var box = Container(
+    width: 300,
+    height: 300,
+    color: Colors.blue,
+  );
+
+  //GestureDetector 交互操作
+  gestureDetectorFun() {
+    var gestureDetectorTest = GestureDetector(
+      child: box,
+      //点击
+      onTap: () {
+        print("onTap");
+      },
+      //按下
+      onTapDown: (pos) {
+        print("onTapDown , ${pos.globalPosition}");
+      },
+      //抬起
+      onTapUp: (pos) {
+        print("onTapUp ,${pos.globalPosition}");
+      },
+      //取消
+      onTapCancel: () {
+        print("onTapCancel");
+      },
+      onDoubleTap: () {
+        print("onDoubleTap --记得双击~么么哒");
+      },
+      onLongPress: () {
+        print("长按");
+      },
+      onLongPressUp: () {
+        print("长按松开");
+      },
+    );
+    return gestureDetectorTest;
   }
 
   //ListView的栗子3，在item中间循环插入一个item
