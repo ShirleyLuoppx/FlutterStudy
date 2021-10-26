@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'dart:math';
 import 'dart:ui';
 
@@ -19,9 +20,23 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      // routes: <String,WidgetBuilder>{
+      //   '/clock':(BuildContext context)=>ClockPage(),
+      // },
     );
   }
+
+  // jump(){
+  //   Navigator.push(context, route)
+  // }
+  //
+  // ClockPage() {
+  //   Navigator.of(context).pushNamed('/clock');
+  // }
+
 }
+
+
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
