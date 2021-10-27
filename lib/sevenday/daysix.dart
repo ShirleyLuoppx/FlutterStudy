@@ -9,10 +9,46 @@ import 'package:path_provider/path_provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // readFileOk();
-  writeString(name);
-  readString();
-  print("叫你一声你可敢答应？");
+  // // readFileOk();
+  // writeString(name);
+  // readString();
+  // print("叫你一声你可敢答应？");
+
+  IOFun();
+}
+
+///-------------------Dart中的IO操作-----------------------------------------///
+IOFun() async {
+  var uri = 'file:///C:/Users/WTCL/Desktop/test.json';
+
+  Uri uriBase = Uri.base;
+  //file:///
+  print(uriBase);
+
+  var uriParse = Uri.parse("file:///C:/Users/WTCL/Desktop/test.json");
+  //----------------------------------0--/C:/Users/WTCL/Desktop/test.json------------------------------null
+  print(
+      "${uriParse.host}--${uriParse.port}--${uriParse.path}--${uriParse.query}--${uriParse.fragment}--${uriParse.data}");
+
+  Uri uriHttp = new Uri.http("", "file:///C:/Users/WTCL/Desktop/test.json");
+  //http
+  print('scheme:====' + uriHttp.scheme);
+
+  //会报错，因为File.fromUri(uri);只能传入一个File相关的uri，类似：file://....，而Uri.http是一个http的，所以会报错
+  // File file =
+  //     File.fromUri(new Uri.http("", "file:///C:/Users/WTCL/Desktop/test.json"));
+  // print(file);
+
+  File fileFromUri = File.fromUri(uriParse);
+  final dir = await getApplicationDocumentsDirectory();
+  return File('${dir.path}/test.json');
+  // print('fileFromUri data:' + fileFromUri.readAsString().toString());
+
+
+  // Future<File> _getLocalDocumentFile() async {
+  //   final dir = await getApplicationDocumentsDirectory();
+  //   return File('${dir.path}/str.txt');
+  // }
 }
 
 // copyFile() async {
@@ -26,6 +62,7 @@ void main() {
 
 //await + async 读取文件
 String name = "Jimi";
+
 /// 获取文档目录文件
 Future<File> _getLocalDocumentFile() async {
   final dir = await getApplicationDocumentsDirectory();
@@ -49,22 +86,18 @@ Future<File> _getLocalSupportFile() async {
 // The file will have its original line endings in your working directory
 Future<void> readString() async {
   try {
-
     final file = await _getLocalDocumentFile();
-    final result  = await file.readAsString();
+    final result = await file.readAsString();
     print("result-----$result");
 
     final file1 = await _getLocalTemporaryFile();
-    final result1  = await file1.readAsString();
+    final result1 = await file1.readAsString();
     print("result1-----$result1");
 
     final file2 = await _getLocalSupportFile();
-    final result2  = await file2.readAsString();
+    final result2 = await file2.readAsString();
     print("result2-----$result2");
-
-
-  } catch (e) {
-  }
+  } catch (e) {}
 }
 
 /// 写入数据
