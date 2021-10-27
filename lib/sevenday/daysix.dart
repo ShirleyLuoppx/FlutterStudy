@@ -14,13 +14,32 @@ void main() {
   // readString();
   // print("叫你一声你可敢答应？");
 
-  IOFun();
+  // IOFun();
+  _takePicture();
 }
+
+///-------------------------File和Directory的常见api--------------///
+fileAndDirectoryFun() {
+  Directory(r'C:\Users\WTCL\Desktop\dart\test').createSync(recursive: true);
+}
+
+Future<File> _takePicture() async {
+  Directory root = await getTemporaryDirectory(); // this is using path_provider
+  String directoryPath = '${root.path}/bozzetto_camera';
+  await Directory(directoryPath).create(recursive: true); // the error because of this line
+  String filePath = '$directoryPath/${DateTime.now()}.jpg';
+  // try {
+  //   await _cameraController.takePicture(filePath);
+  // } catch (e) {
+  //   return null;
+  // }
+  return File(filePath);
+}
+
 
 ///-------------------Dart中的IO操作-----------------------------------------///
 IOFun() async {
   var uri = 'file:///C:/Users/WTCL/Desktop/test.json';
-
   Uri uriBase = Uri.base;
   //file:///
   print(uriBase);
@@ -43,7 +62,6 @@ IOFun() async {
   final dir = await getApplicationDocumentsDirectory();
   return File('${dir.path}/test.json');
   // print('fileFromUri data:' + fileFromUri.readAsString().toString());
-
 
   // Future<File> _getLocalDocumentFile() async {
   //   final dir = await getApplicationDocumentsDirectory();
