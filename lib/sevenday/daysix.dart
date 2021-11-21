@@ -15,8 +15,11 @@ void main() {
   // print("叫你一声你可敢答应？");
 
   // IOFun();
-  _takePicture();
-}
+  // _takePicture();
+  // fileAndDirectory();
+
+  fileObjectTest();
+} //test
 
 ///-------------------------File和Directory的常见api--------------///
 fileAndDirectoryFun() {
@@ -26,7 +29,8 @@ fileAndDirectoryFun() {
 Future<File> _takePicture() async {
   Directory root = await getTemporaryDirectory(); // this is using path_provider
   String directoryPath = '${root.path}/bozzetto_camera';
-  await Directory(directoryPath).create(recursive: true); // the error because of this line
+  await Directory(directoryPath)
+      .create(recursive: true); // the error because of this line
   String filePath = '$directoryPath/${DateTime.now()}.jpg';
   // try {
   //   await _cameraController.takePicture(filePath);
@@ -35,7 +39,6 @@ Future<File> _takePicture() async {
   // }
   return File(filePath);
 }
-
 
 ///-------------------Dart中的IO操作-----------------------------------------///
 IOFun() async {
@@ -67,6 +70,88 @@ IOFun() async {
   //   final dir = await getApplicationDocumentsDirectory();
   //   return File('${dir.path}/str.txt');
   // }
+}
+
+//File和Directory的常见Api
+fileAndDirectory() async {
+  //创建文件夹，recursive默认false：只能创建下一级
+  Directory appDocDirectory = await getApplicationDocumentsDirectory();
+  print(appDocDirectory); // /data/user/0/com.ppx.flutterapp/app_flutter
+  var dire = new Directory(appDocDirectory.path + "/test/testdirectory");
+  // dire.create(recursive: true);
+  dire.createSync(recursive: true);
+
+  //列出所有文件夹
+  //默认非递归只打印一级
+  var list = appDocDirectory.list();
+  list.forEach((element) {
+    print("--------------------");
+    print(element.path);
+  });
+
+  //递归列出所有层级下的文件
+  var list1 = appDocDirectory.list(recursive: true);
+  list1.forEach((element) {
+    print("*******************");
+    print(element.path);
+  });
+
+  //重命名
+  dire.rename(appDocDirectory.path + "/test/rename");
+}
+
+//File对象的常用操作：
+fileObjectTest() async {
+  Directory appDocDirectory = await getApplicationDocumentsDirectory();
+  readFileFromName(appDocDirectory.path + "/test/rename/log.txt");
+  writeFile();
+  filePath();
+}
+
+//根据名字读取文件
+readFileFromName(name) async {
+  try {
+    var file = File(name);
+    bool exist = await file.exists();
+    if (exist) {
+      //长度
+      print(await file.length());
+      //上次修改时间
+      print(await file.lastModified());
+      //父类路径
+      print(file.parent.path);
+
+      return file.readAsString();
+    } else {
+      file.create(recursive: true);
+      return "文件不存在，已为您创建文件。";
+    }
+  } catch (e) {
+    print(e);
+  }
+}
+
+//文件的写入
+writeFile() async {
+  Directory appDocDirectory = await getApplicationDocumentsDirectory();
+  var path = appDocDirectory.path + "/test/rename/log.txt";
+  var file = File(path);
+  //mode：默认全部替换 FileMode.write or  追加内容 FileMode.append
+  file.writeAsString("this is this appending content for writing file",
+      mode: FileMode.writeOnlyAppend);
+}
+
+///关于移动端的文件读取问题
+filePath() async {
+  //临时目录
+  print("getTemporaryDirectory:");
+  print(await getTemporaryDirectory());//  /data/user/0/com.ppx.flutterapp/cache
+  //文档目录
+  print("getApplicationDocumentsDirectory:");
+  print(await getApplicationDocumentsDirectory());// /data/user/0/com.ppx.flutterapp/app_flutter
+  //sd卡目录
+  print("getExternalStorageDirectory:");
+  print(await getExternalStorageDirectory());// /storage/emulated/0/Android/data/com.ppx.flutterapp/files
 }
 
 // copyFile() async {
